@@ -363,6 +363,30 @@ where department_id
 in (select distinct department_id from employees where instr(last_name, 'u') > 0);
 
 
+create table indexTBL as select distinct first_name, last_name, hire_date from employees;
+
+
+select * from indexTBL;
+
+-- 인덱스 생성 전 검색 방식 : Full
+select * from indexTBL where first_name = 'Jack';
+
+-- 인덱스 생성
+create index idx_indexTBL_firstname on indexTBL(first_name);
+
+-- 인덱스 생성 후 검색 방식 : index 검색(Range scan)
+select * from indexTBL where first_name = 'Jack';
+
+
+
+
+
+
+
+
+
+
+
 
 
 
